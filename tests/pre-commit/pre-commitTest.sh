@@ -16,7 +16,8 @@ setUp()
 testFirstCommitClean()
 {
     cp "$TESTHOME/../files/php-ok.php" "$SHUNIT_TMPDIR/"
-    git add php-ok.php
+    cp "$TESTHOME/../files/linestyle-unix.txt" "$SHUNIT_TMPDIR/"
+    git add php-ok.php linestyle-unix.txt
     git commit -qm 'test commit'
     assertTrue "Clean commit should work" $?
 }
