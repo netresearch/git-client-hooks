@@ -2,10 +2,9 @@
 Netresearch pre-commit hook for Git
 ***********************************
 
-
 Features
 ========
-
+* Checks staged files only
 * File content checks:
 
   * wrong lineendings
@@ -20,15 +19,24 @@ Features
 * Coding standards checks
 
   * forbid the commit if violations are found
-  * Configuration file for Coding Standard, Path to PHPCS, Ignore List
-* Shows output in a 'less' pipe following the smart git principles
+  * Configuration for Coding Standard
 
 
 Installation
 ============
+Symlink the ``pre-commit`` script into your ``.git/hooks`` directory.
 
-* Put the script "pre-commit" into your .git/hooks directory
-* OR: add the script to your pre-commit "chain"
-  (you probably know what to do then)
-* Put the Config file "config" into the same dir as the "pre-commit"
-  script and edit it to your requirements
+
+Setup
+=====
+Deactivate coding standards check::
+
+    $ git config pre-commit.phpcs 0
+
+Change your coding standard::
+
+    $ git config pre-commit.phpcs-standard PEAR
+
+Set the phpcs file encoding::
+
+    $ git config pre-commit.phpcs-encoding iso-8859-1
