@@ -1,9 +1,10 @@
 #!/bin/sh
 # Checks for PHP syntax errors and forbidden function calls
 
-res=$(php -d display_errors=Off -d log_errors=On -l "$1" >&1)
+RES=$(php -d display_errors=Off -d log_errors=On -l "$1" 2>&1)
 if [ $? -ne 0 ]; then
-    echo $res|grep 'Parse error'
+    echo 'Invalid PHP code found' 1>&2
+    echo $RES|grep --color=always '^PHP Parse error' 1>&2
 fi
 
 grep -Hn "\(var_dump\|print_r\|debug_print_backtrace\)" "$1";RET=$?
