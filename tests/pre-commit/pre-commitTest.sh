@@ -47,4 +47,17 @@ testCheckStagedOnly()
     assertTrue "Commit may not fail because the staged file is ok" $?
 }
 
+testSecondCommitClean()
+{
+    cp "$TESTHOME/../files/php-ok.php" "$SHUNIT_TMPDIR/"
+    cp "$TESTHOME/../files/linestyle-windows.txt" "$SHUNIT_TMPDIR/"
+    git add php-ok.php
+    git commit -qm 'test commit'
+    assertTrue "Clean commit should work" $?
+
+    git add linestyle-windows.txt
+    git commit -qm 'test commit'
+    assertFalse "Second commit should fail" $?
+}
+
 . shunit2
