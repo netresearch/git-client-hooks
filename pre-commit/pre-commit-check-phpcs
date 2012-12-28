@@ -10,7 +10,7 @@ PHPCS=phpcs
 STANDARD=PEAR
 IGNORE=""
 ENCODING=""
-IGNORE_WARNINGS=""
+IGNORE_WARNINGS="-n"
 
 if [ "$(git config --get pre-commit.phpcs)" = "0" ]; then
     # deactivated
@@ -39,7 +39,7 @@ OUTPUT=$($PHPCS -s $IGNORE_WARNINGS --standard=$STANDARD $ENCODING $IGNORE "$@")
 RETVAL=$?
 
 if [ $RETVAL -ne 0 ]; then
-    echo "$OUTPUT"
+    echo "$OUTPUT" 1>&2
 fi
 
 exit $RETVAL
