@@ -1,9 +1,10 @@
 #!/bin/sh
+dir="`dirname "$0"`"
+TESTHOME="`readlink -f "$dir"`"
+
 setUp()
 {
-    dir="`dirname "$0"`"
-    fulldir="`readlink -f "$dir"`"
-    cd "$fulldir"
+    cd "$TESTHOME"
 }
 
 testSyntaxError()
