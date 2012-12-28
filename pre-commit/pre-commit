@@ -7,7 +7,6 @@
 #
 # see the README
 
-FILE_PATTERN="\.(php|phtml)$"
 TMP_STAGING=".tmp_staging"
 
 hookfile="`readlink -f "$0"`"
@@ -33,9 +32,23 @@ fi
 # match files against whitelist
 FILES_TO_CHECK=""
 for FILE in $FILES; do
-    echo "$FILE" | egrep -q "$FILE_PATTERN"
-    RETVAL=$?
-    if [ "$RETVAL" -eq "0" ]; then
+    EXT=${FILE##*.}
+
+    CHECK=1
+    case $EXT in
+        "php" | "phtml" )
+            PHP_FILES="$PHP_FILES $FILE"
+            LINE_FILES="$LINE_FILES $FILE"
+            ;;
+        css | htm | html | js | rst | tpl | txt | ts | tss | tsc )
+            LINE_FILES="$LINE_FILES $FILE"
+            ;;
+        * )
+            CHECK=0
+            ;;
+    esac
+
+    if [ "$CHECK" -eq "1" ]; then
         FILES_TO_CHECK="$FILES_TO_CHECK $FILE"
     fi
 done
@@ -56,28 +69,32 @@ mkdir $TMP_STAGING
 # the version in the working directory
 STAGED_FILES=""
 HAS_ERROR=0
-for FILE in $FILES_TO_CHECK
-do
-  ID=$(git diff-index --cached $against $FILE | cut -d " " -f4)
+for FILE in $FILES_TO_CHECK; do
+    ID=$(git diff-index --cached $against $FILE | cut -d " " -f4)
 
-  # create staged version of file in temporary staging area with the same
-  # path as the original file so that the phpcs ignore filters can be applied
-  mkdir -p "$TMP_STAGING/$(dirname $FILE)"
-  STAGED_FILE="$TMP_STAGING/$FILE"
-  git cat-file blob $ID > "$STAGED_FILE"
-  STAGED_FILES="$STAGED_FILES $STAGED_FILE"
+    # create staged version of file in temporary staging area with the same
+    # path as the original file so that the phpcs ignore filters can be
+    # applied
+    mkdir -p "$TMP_STAGING/$(dirname $FILE)"
+    STAGED_FILE="$TMP_STAGING/$FILE"
+    git cat-file blob $ID > "$STAGED_FILE"
+    STAGED_FILES="$STAGED_FILES $STAGED_FILE"
+done
 
-  "$HOOKHOME/pre-commit-check-php" "$STAGED_FILE"; RET=$?
-  if [ $RET -ne 0 ]; then
-    HAS_ERROR=1
-    continue
-  fi
+for FILE in $PHP_FILES; do
+    "$HOOKHOME/pre-commit-check-php" "$STAGED_FILE"; RET=$?
+    if [ $RET -ne 0 ]; then
+        HAS_ERROR=1
+        continue
+    fi
+done
 
-  "$HOOKHOME/pre-commit-check-linestyle" "$STAGED_FILE"; RET=$?
-  if [ $RET -ne 0 ]; then
-    HAS_ERROR=1
-    continue
-  fi
+for FILE in $LINE_FILES; do
+    "$HOOKHOME/pre-commit-check-linestyle" "$STAGED_FILE"; RET=$?
+    if [ $RET -ne 0 ]; then
+        HAS_ERROR=1
+        continue
+    fi
 done
 
 if [ $HAS_ERROR -eq 0 ]; then
