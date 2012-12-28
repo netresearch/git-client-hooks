@@ -38,4 +38,13 @@ testFirstCommitLinestyleError()
     assertFalse "Commit should fail because of linestyle error" $?
 }
 
+testCheckStagedOnly()
+{
+    cp "$TESTHOME/../files/php-ok.php" "$SHUNIT_TMPDIR/"
+    git add php-ok.php
+    cp "$TESTHOME/../files/php-syntax-error.php" "$SHUNIT_TMPDIR/php-ok.php"
+    git commit -qm 'test commit'
+    assertTrue "Commit may not fail because the staged file is ok" $?
+}
+
 . shunit2
