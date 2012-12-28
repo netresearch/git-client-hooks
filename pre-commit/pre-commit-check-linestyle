@@ -1,0 +1,15 @@
+#!/bin/bash
+# Forces linux line endings and prevents BOMs
+
+# Check BOM
+if [ "`head -c 3 -- "$1"`" == $'\xef\xbb\xbf' ]; then
+    echo "Found BOM in $1" 1>&2
+    exit 1
+fi
+
+# Check line endings
+grep -Hnq $'\r' "$1"; RET=$?
+if [ $RET -ne 1 ]; then
+    echo "Windows/Mac newlines found in $1" 1>&2
+    exit 2
+fi
