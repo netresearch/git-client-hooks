@@ -10,7 +10,7 @@ setUp()
 
     cd "$SHUNIT_TMPDIR"
     git init -q
-    ln -s "$TESTHOME/../../pre-commit/pre-commit" .git/hooks/
+    ln -s "$TESTHOME/../../hooks/pre-commit" .git/hooks/
 }
 
 testFirstCommitClean()

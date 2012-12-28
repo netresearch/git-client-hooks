@@ -8,19 +8,19 @@ setUp()
 
 testOk()
 {
-    ../../pre-commit/pre-commit-check-phpcs ../files/php-ok.php
+    ../../hooks/pre-commit-check-phpcs ../files/php-ok.php
     assertTrue $?
 }
 
 testError()
 {
-    ../../pre-commit/pre-commit-check-phpcs ../files/phpcs-error.php
+    ../../hooks/pre-commit-check-phpcs ../files/phpcs-error.php
     assertFalse $?
 }
 
 testWarningIgnored()
 {
-    ../../pre-commit/pre-commit-check-phpcs ../files/phpcs-warning.php
+    ../../hooks/pre-commit-check-phpcs ../files/phpcs-warning.php
     assertTrue "Warnings should be ignored by default" $?
 }
 
