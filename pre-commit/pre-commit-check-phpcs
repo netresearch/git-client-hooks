@@ -1,0 +1,45 @@
+#!/bin/sh
+# execute the code sniffer
+#
+# deactivate it with
+#  $ git config pre-commit.phpcs 0
+# set preferred standard with
+#  $ git config pre-commit.phpcs-standard PEAR
+
+PHPCS=phpcs
+STANDARD=PEAR
+IGNORE=""
+ENCODING=""
+IGNORE_WARNINGS=""
+
+if [ "$(git config --get pre-commit.phpcs)" = "0" ]; then
+    # deactivated
+    exit 0
+fi
+
+TMP="$(git config --get pre-commit.phpcs-standard)"
+if [ "$TMP" != "" ]; then
+    STANDARD="$TMP"
+fi
+
+TMP="$(git config --get pre-commit.phpcs-encoding)"
+if [ "$TMP" != "" ]; then
+    ENCODING="--encoding=$TMP"
+fi
+
+if [ "$PHPCS_IGNORE" != "" ]; then
+    IGNORE="--ignore=$PHPCS_IGNORE"
+fi
+
+if [ "$PHPCS_IGNORE_WARNINGS" = "1" ]; then
+    IGNORE_WARNINGS="-n"
+fi
+
+OUTPUT=$($PHPCS -s $IGNORE_WARNINGS --standard=$STANDARD $ENCODING $IGNORE "$@")
+RETVAL=$?
+
+if [ $RETVAL -ne 0 ]; then
+    echo "$OUTPUT"
+fi
+
+exit $RETVAL

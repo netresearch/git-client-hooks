@@ -98,15 +98,10 @@ for FILE in $LINE_FILES; do
 done
 
 if [ $HAS_ERROR -eq 0 ]; then
-    #"$HOOKHOME/pre-commit-check-linestyle" "$STAGED_FILE"; RET=$?
-    #if [ $RET -ne 0 ]; then
-    #    HAS_ERROR=1
-    #    continue
-    #fi
-    echo -n
-    #run phpcs on all files at once
-    #OUTPUT=$($PHPCS_BIN -s $IGNORE_WARNINGS  --standard=$PHPCS_CODING_STANDARD $ENCODING $IGNORE $SNIFFS $STAGED_FILES)
-    #RETVAL=$?
+    "$HOOKHOME/pre-commit-check-phpcs" $PHP_FILES; RET=$?
+    if [ $RET -ne 0 ]; then
+        HAS_ERROR=1
+    fi
 fi
 
 # delete temporary copy of staging area
