@@ -27,6 +27,15 @@ Installation
 Symlink the ``pre-commit`` script into your ``.git/hooks`` directory.
 
 
+Global installation
+-------------------
+To automatically install this hook in new repositories, symlink it into
+the git hook templates dir::
+
+    $ cd /usr/share/git-core/templates/hooks/
+    $ ln -s /usr/local/src/git-hooks/pre-commit/pre-commit
+
+
 Setup
 =====
 Deactivate coding standards check::
