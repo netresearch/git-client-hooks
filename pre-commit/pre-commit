@@ -37,11 +37,11 @@ for FILE in $FILES; do
     CHECK=1
     case $EXT in
         "php" | "phtml" )
-            PHP_FILES="$PHP_FILES $FILE"
-            LINE_FILES="$LINE_FILES $FILE"
+            PHP_FILES="$PHP_FILES $TMP_STAGING/$FILE"
+            LINE_FILES="$LINE_FILES $TMP_STAGING/$FILE"
             ;;
         css | htm | html | js | rst | tpl | txt | ts | tss | tsc )
-            LINE_FILES="$LINE_FILES $FILE"
+            LINE_FILES="$LINE_FILES $TMP_STAGING/$FILE"
             ;;
         * )
             CHECK=0
@@ -82,7 +82,7 @@ for FILE in $FILES_TO_CHECK; do
 done
 
 for FILE in $PHP_FILES; do
-    "$HOOKHOME/pre-commit-check-php" "$STAGED_FILE"; RET=$?
+    "$HOOKHOME/pre-commit-check-php" "$FILE"; RET=$?
     if [ $RET -ne 0 ]; then
         HAS_ERROR=1
         continue
@@ -90,7 +90,7 @@ for FILE in $PHP_FILES; do
 done
 
 for FILE in $LINE_FILES; do
-    "$HOOKHOME/pre-commit-check-linestyle" "$STAGED_FILE"; RET=$?
+    "$HOOKHOME/pre-commit-check-linestyle" "$FILE"; RET=$?
     if [ $RET -ne 0 ]; then
         HAS_ERROR=1
         continue
@@ -98,6 +98,11 @@ for FILE in $LINE_FILES; do
 done
 
 if [ $HAS_ERROR -eq 0 ]; then
+    #"$HOOKHOME/pre-commit-check-linestyle" "$STAGED_FILE"; RET=$?
+    #if [ $RET -ne 0 ]; then
+    #    HAS_ERROR=1
+    #    continue
+    #fi
     echo -n
     #run phpcs on all files at once
     #OUTPUT=$($PHPCS_BIN -s $IGNORE_WARNINGS  --standard=$PHPCS_CODING_STANDARD $ENCODING $IGNORE $SNIFFS $STAGED_FILES)
