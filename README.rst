@@ -49,7 +49,7 @@ To make it available to all users on the machine, run (as root)::
 
 Then you can run it in any git repository::
 
-    $ git hooksetup
+    $ git setup-hooks
 
 
 Setup
