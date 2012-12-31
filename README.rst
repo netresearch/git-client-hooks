@@ -15,7 +15,7 @@ Features
   * var_dump, debug_print_backtrace, print_r
 * commit message checks
 
-  * issue number required
+  * issue number required (Jira-like or TYPO3.org)
 * Coding standards checks
 
   * forbid the commit if violations are found
