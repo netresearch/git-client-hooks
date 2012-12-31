@@ -33,8 +33,23 @@ To automatically install this hook in new repositories, symlink it into
 the git hook templates dir::
 
     $ cd /usr/share/git-core/templates/hooks/
-    $ ln -s /usr/local/src/git-hooks/hooks/pre-commit
-    $ ln -s /usr/local/src/git-hooks/hooks/commit-msg
+    $ ln -s /usr/local/src/git-client-hooks/hooks/pre-commit
+    $ ln -s /usr/local/src/git-client-hooks/hooks/commit-msg
+
+
+Per-repository installation with an alias
+-----------------------------------------
+Create the (user-) global git alias at first::
+
+    $ ./create-global-alias.sh
+
+To make it available to all users on the machine, run (as root)::
+
+    $ ./create-system-alias.sh
+
+Then you can run it in any git repository::
+
+    $ git hooksetup
 
 
 Setup
