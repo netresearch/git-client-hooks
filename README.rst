@@ -34,6 +34,7 @@ the git hook templates dir::
 
     $ cd /usr/share/git-core/templates/hooks/
     $ ln -s /usr/local/src/git-hooks/hooks/pre-commit
+    $ ln -s /usr/local/src/git-hooks/hooks/commit-msg
 
 
 Setup
