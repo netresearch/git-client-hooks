@@ -6,6 +6,10 @@
 # set preferred standard with
 #  $ git config pre-commit.phpcs-standard PEAR
 
+if [ "$#" -eq 0 ]; then
+    exit
+fi
+
 PHPCS=phpcs
 STANDARD=PEAR
 IGNORE=""

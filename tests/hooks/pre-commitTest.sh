@@ -60,4 +60,16 @@ testSecondCommitClean()
     assertFalse "Second commit should fail" $?
 }
 
+testPhpcsNoPHPFiles()
+{
+    cp "$TESTHOME/../files/linestyle-unix.txt" "$SHUNIT_TMPDIR/"
+    git add linestyle-unix.txt
+    git commit -qm 'test commit'
+    assertTrue "First txt commit should work" $?
+
+    echo foo > linestyle-unix.txt
+    git commit -aqm 'test commit'
+    assertTrue "Committing unstaged file should work" $?
+}
+
 . shunit2
