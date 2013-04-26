@@ -3,7 +3,7 @@
 
 RES=$(php -d display_errors=Off -d log_errors=On -l "$1" 2>&1)
 if [ $? -ne 0 ]; then
-    echo 'Invalid PHP code found' 1>&2
+    echo 'Invalid PHP code found in' $1 1>&2
     echo $RES|grep --color=always '^PHP Parse error' 1>&2
     exit 1
 fi
