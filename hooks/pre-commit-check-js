@@ -1,0 +1,9 @@
+#!/bin/bash
+# Checks for well-formedness of JavaScript files
+# requires acorn
+RES=$(acorn --silent "$1")
+if [ $? -ne 0 ]; then
+    echo "$RES"
+    echo "Invalid JavaScript in $1" 1>&2
+    exit 1
+fi

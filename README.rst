@@ -13,12 +13,9 @@ Features
 
   * syntax
   * var_dump, debug_print_backtrace, print_r
-* XML and HTML checks:
-
-  * syntax / well-formedness
-* JSON checks:
-
-  * syntax
+* JavaScript syntax checks
+* JSON syntax checks
+* XML and HTML syntax checks (well-formedness)
 * commit message checks
 
   * issue number required (Jira-like or TYPO3.org)
@@ -31,6 +28,14 @@ Features
 Installation
 ============
 Symlink the ``pre-commit`` script into your ``.git/hooks`` directory.
+
+
+Dependencies
+------------
+* ``acorn`` for JavaScript syntax checks (``npm -g install acorn``)
+* ``json_pp`` for JSON syntax checks (in the Debian ``perl`` package)
+* ``php`` for PHP syntax checks
+* ``xmllint`` for XML syntax checks
 
 
 Global installation
