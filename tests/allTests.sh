@@ -13,7 +13,7 @@ done
 if [ $HAS_ERROR -eq 0 ]; then
     echo "all OK"
 else
-    echo "some ERROR"
+    echo "some ERRORs"
 fi
 
 exit $HAS_ERROR

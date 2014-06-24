@@ -1,0 +1,20 @@
+#!/bin/bash
+# Checks for well-formedness of xml/html files
+ext=${1/.*\./}
+if [ $ext = "htm" -o $ext = "html" ]; then
+    # --html always returns exit code 0, so we check for output
+    # --html is too lenient, so we use the xml parser (not --html)
+    # instead we fix known errors with entities
+    RES=$(cat "$1" | sed 's/\&nbsp;/\&#160;/'|xmllint --noout - 2>&1)
+    if [ $? -ne 0 -o x"$RES" != x ]; then
+        echo "$RES"
+        echo 'Invalid HTML in ' $1 1>&2
+        exit 1
+    fi
+else
+    RES=$(xmllint --noout "$1")
+    if [ $? -ne 0 ]; then
+        echo 'Invalid XML in ' $1 1>&2
+        exit 1
+    fi
+fi

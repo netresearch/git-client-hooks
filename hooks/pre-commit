@@ -40,6 +40,10 @@ for FILE in $FILES; do
             PHP_FILES="$PHP_FILES $TMP_STAGING/$FILE"
             LINE_FILES="$LINE_FILES $TMP_STAGING/$FILE"
             ;;
+        htm | html | xml )
+            XML_FILES="$XML_FILES $TMP_STAGING/$FILE"
+            LINE_FILES="$LINE_FILES $TMP_STAGING/$FILE"
+            ;;
         css | htm | html | js | rst | tpl | txt | ts | tss | tsc )
             LINE_FILES="$LINE_FILES $TMP_STAGING/$FILE"
             ;;
@@ -83,6 +87,14 @@ done
 
 for FILE in $PHP_FILES; do
     "$HOOKHOME/pre-commit-check-php" "$FILE"; RET=$?
+    if [ $RET -ne 0 ]; then
+        HAS_ERROR=1
+        continue
+    fi
+done
+
+for FILE in $XML_FILES; do
+    "$HOOKHOME/pre-commit-check-xml" "$FILE"; RET=$?
     if [ $RET -ne 0 ]; then
         HAS_ERROR=1
         continue
