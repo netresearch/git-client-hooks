@@ -44,7 +44,7 @@ for FILE in $FILES; do
             XML_FILES="$XML_FILES $TMP_STAGING/$FILE"
             LINE_FILES="$LINE_FILES $TMP_STAGING/$FILE"
             ;;
-        css | htm | html | js | rst | tpl | txt | ts | tss | tsc )
+        css | js | rst | tpl | txt | ts | tss | tsc )
             LINE_FILES="$LINE_FILES $TMP_STAGING/$FILE"
             ;;
         * )
