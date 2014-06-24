@@ -1,0 +1,8 @@
+#!/bin/bash
+# Checks for well-formedness of JSON files
+# requires json_pp (contained in the debian perl package)
+RES=$(json_pp -t null < "$1")
+if [ $? -ne 0 ]; then
+    echo "Invalid JSON in $1" 1>&2
+    exit 1
+fi

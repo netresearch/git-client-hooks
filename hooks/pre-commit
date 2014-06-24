@@ -44,6 +44,9 @@ for FILE in $FILES; do
             XML_FILES="$XML_FILES $TMP_STAGING/$FILE"
             LINE_FILES="$LINE_FILES $TMP_STAGING/$FILE"
             ;;
+        json )
+            JSON_FILES="$JSON_FILES $TMP_STAGING/$FILE"
+            ;;
         css | js | rst | tpl | txt | ts | tss | tsc )
             LINE_FILES="$LINE_FILES $TMP_STAGING/$FILE"
             ;;
@@ -95,6 +98,14 @@ done
 
 for FILE in $XML_FILES; do
     "$HOOKHOME/pre-commit-check-xml" "$FILE"; RET=$?
+    if [ $RET -ne 0 ]; then
+        HAS_ERROR=1
+        continue
+    fi
+done
+
+for FILE in $JSON_FILES; do
+    "$HOOKHOME/pre-commit-check-json" "$FILE"; RET=$?
     if [ $RET -ne 0 ]; then
         HAS_ERROR=1
         continue

@@ -13,6 +13,12 @@ Features
 
   * syntax
   * var_dump, debug_print_backtrace, print_r
+* XML and HTML checks:
+
+  * syntax / well-formedness
+* JSON checks:
+
+  * syntax
 * commit message checks
 
   * issue number required (Jira-like or TYPO3.org)
