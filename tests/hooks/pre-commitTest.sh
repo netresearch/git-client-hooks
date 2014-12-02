@@ -72,4 +72,23 @@ testPhpcsNoPHPFiles()
     assertTrue "Committing unstaged file should work" $?
 }
 
+testJshint()
+{
+    cp "$TESTHOME/../files/.jshintrc" "$SHUNIT_TMPDIR/"
+    cp "$TESTHOME/../files/jshint-error.js" "$SHUNIT_TMPDIR/"
+    git add .jshintrc jshint-error.js
+    git commit -qm 'test commit'
+    assertFalse "Commit should fail because of jshint error" $?
+}
+
+testJshintDisabled()
+{
+    cp "$TESTHOME/../files/.jshintrc" "$SHUNIT_TMPDIR/"
+    cp "$TESTHOME/../files/jshint-error.js" "$SHUNIT_TMPDIR/"
+    git add .jshintrc jshint-error.js
+    git config pre-commit.jshint 0
+    git commit -qm 'test commit'
+    assertTrue "Commit should work; jshint is deactivated" $?
+}
+
 . shunit2

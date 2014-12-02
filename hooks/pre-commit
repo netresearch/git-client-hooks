@@ -137,6 +137,11 @@ if [ $HAS_ERROR -eq 0 ]; then
     if [ $RET -ne 0 ]; then
         HAS_ERROR=1
     fi
+
+    "$HOOKHOME/pre-commit-check-jshint" $JS_FILES; RET=$?
+    if [ $RET -ne 0 ]; then
+        HAS_ERROR=1
+    fi
 fi
 
 # delete temporary copy of staging area

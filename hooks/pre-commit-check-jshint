@@ -1,0 +1,23 @@
+#!/bin/sh
+# execute the jshint code sniffer
+#
+# deactivate it with
+#  $ git config pre-commit.jshint 0
+
+if [ "$#" -eq 0 ]; then
+    exit
+fi
+
+if [ "$(git config --get pre-commit.jshint)" = "0" ]; then
+    # deactivated
+    exit 0
+fi
+
+OUTPUT=$(jshint "$@")
+RETVAL=$?
+
+if [ $RETVAL -ne 0 ]; then
+    echo "$OUTPUT" 1>&2
+fi
+
+exit $RETVAL

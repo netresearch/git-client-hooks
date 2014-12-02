@@ -23,6 +23,7 @@ Features
 
   * forbid the commit if violations are found
   * Configuration for Coding Standard
+  * ``jshint`` checks
 
 
 Installation
@@ -76,3 +77,7 @@ Change your coding standard::
 Set the phpcs file encoding::
 
     $ git config pre-commit.phpcs-encoding iso-8859-1
+
+Disable ``jshint`` checking::
+
+    $ git config pre-commit.jshint 0
