@@ -31,6 +31,12 @@ testHtmlUnclosedP()
     assertFalse $?
 }
 
+testHtmlFluidCdataOk()
+{
+    ../../hooks/pre-commit-check-xml ../files/html-fluid-cdata.htm
+    assertTrue $?
+}
+
 testXmlSyntaxError()
 {
     ../../hooks/pre-commit-check-xml ../files/xml-syntax-error.xml

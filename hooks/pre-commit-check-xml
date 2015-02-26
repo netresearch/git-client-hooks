@@ -9,6 +9,8 @@ if [ $ext = "htm" -o $ext = "html" ]; then
         | sed 's/\&nbsp;/\&#160;/g' \
         | sed 's/\&shy;/\&#173;/g' \
         | sed 's/\&ndash;/\&#8211;/g' \
+        | sed 's#<f:format.cdata>#<![CDATA[#g' \
+        | sed 's#</f:format.cdata>#]]>#g' \
         |xmllint --noout - 2>&1)
     if [ $? -ne 0 -o x"$RES" != x ]; then
         echo "$RES"
