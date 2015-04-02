@@ -17,5 +17,6 @@ fi
 pcregrep -rMl '\?>\s\s+\z' "$1"; RET=$?
 if [ $RET -ne 1 ]; then
     echo 'Whitespace after closing PHP tag found' 1>&2
+    echo 'Use "phing applycs" to fix that' 1>&2
     exit 2
 fi
