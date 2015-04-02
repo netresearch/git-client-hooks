@@ -32,6 +32,13 @@ testDebugPrintBacktrace()
     assertFalse $?
 }
 
+testWhitespaceClosingPhpTag()
+{
+    ../../hooks/pre-commit-check-php\
+        ../files/php-whitespace-closing-error.php
+    assertFalse $?
+}
+
 testAllFine()
 {
     ../../hooks/pre-commit-check-php\

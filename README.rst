@@ -13,6 +13,7 @@ Features
 
   * syntax
   * var_dump, debug_print_backtrace, print_r
+  * Superfluous whitespace after closing PHP tag
 * JavaScript syntax checks
 * JSON syntax checks
 * XML and HTML syntax checks (well-formedness)
@@ -37,6 +38,7 @@ Dependencies
 * ``jshint`` for JavaScript coding style checks (``npm -g install jshint``)
 * ``json_pp`` for JSON syntax checks (in the Debian ``perl`` package)
 * ``php`` for PHP syntax checks
+* ``pcregrep`` for PHP whitespace check
 * ``xmllint`` for XML syntax checks
 
 

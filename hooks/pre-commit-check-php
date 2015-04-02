@@ -13,3 +13,9 @@ if [ $RET -ne 1 ]; then
     echo 'Forbidden function call found' 1>&2
     exit 2
 fi
+
+pcregrep -rMl '\?>\s\s+\z' "$1"; RET=$?
+if [ $RET -ne 1 ]; then
+    echo 'Whitespace after closing PHP tag found' 1>&2
+    exit 2
+fi
