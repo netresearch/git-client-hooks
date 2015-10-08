@@ -37,6 +37,12 @@ testHtmlFluidCdataOk()
     assertTrue $?
 }
 
+testHtmlFluidDebug()
+{
+    ../../hooks/pre-commit-check-xml ../files/html-fluid-debug.htm
+    assertFalse $?
+}
+
 testXmlSyntaxError()
 {
     ../../hooks/pre-commit-check-xml ../files/xml-syntax-error.xml
