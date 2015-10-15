@@ -43,6 +43,12 @@ testHtmlFluidDebug()
     assertFalse $?
 }
 
+testHtmlFluidDebugInline()
+{
+    ../../hooks/pre-commit-check-xml ../files/html-fluid-debug-inline.htm
+    assertFalse $?
+}
+
 testXmlSyntaxError()
 {
     ../../hooks/pre-commit-check-xml ../files/xml-syntax-error.xml

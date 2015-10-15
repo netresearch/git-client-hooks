@@ -18,10 +18,10 @@ if [ $ext = "htm" -o $ext = "html" ]; then
         exit 1
     fi
 
-    # check for forbidden tags
-    grep -Hn "\(<f:debug[^>]*>\|</f:debug>\)" "$1"; RET=$?
+    # check for f:debug
+    grep -Hn "\(<f:debug[^>]*>\|</f:debug>\|{[^{]*f:debug(.*)[^}]*}\)" "$1"; RET=$?
     if [ $RET -ne 1 ]; then
-        echo 'Forbidden tag found' 1>&2
+        echo 'Forbidden f:debug found in ' $1 1>&2
         exit 2
     fi
 else
