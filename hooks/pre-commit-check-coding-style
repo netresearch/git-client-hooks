@@ -45,7 +45,7 @@ for FILE in $FILES; do
             LINE_FILES="$LINE_FILES $TMP_STAGING/$FILE"
             ;;
         js )
-            JS_FILES="$JSON_FILES $TMP_STAGING/$FILE"
+            JS_FILES="$JS_FILES $TMP_STAGING/$FILE"
             LINE_FILES="$LINE_FILES $TMP_STAGING/$FILE"
             ;;
         json )
