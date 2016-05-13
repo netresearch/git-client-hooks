@@ -3,7 +3,7 @@
 
 dir="`dirname "$0"`"
 HOOKSDIR="`readlink -f "$dir"`/hooks"
-git config --global alias.setup-hooks '!cd "`git rev-parse --git-dir`/hooks" && ln -fs $HOOKSDIR/commit-msg && ln -fs $HOOKSDIR/pre-commit; cd -'
+git config --global alias.setup-hooks "!cd `git rev-parse --git-dir`/hooks && ln -fs ${HOOKSDIR}/commit-msg-require-ticket-number commit-msg && ln -fs ${HOOKSDIR}/pre-commit-check-coding-style pre-commit; cd -"
 
 echo "You may now run
  $ git setup-hooks
