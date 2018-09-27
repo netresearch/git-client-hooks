@@ -39,6 +39,7 @@ Dependencies
 * ``json_pp`` for JSON syntax checks (in the Debian ``perl`` package)
 * ``php`` for PHP syntax checks
 * ``pcregrep`` for PHP whitespace check
+* ``html-validator`` for HTML5 check (``npm -g install {vnu-jar, html-validator-cli}``, )
 * ``xmllint`` for XML syntax checks
 
 

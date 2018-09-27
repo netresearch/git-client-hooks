@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Checks for well-formedness of HTML5 files.
+#
+# Dependencies:
+#   * Java Runtime Environment
+#   * Node.js
+#     * npm
+#       * vnu-jar
+#       * html-validator-cli
+
+if ! ( html-validator "$1" --quiet )
+  then
+    >&2 echo "Invalid HTML in $1"
+    exit 1
+  fi
