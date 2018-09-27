@@ -10,7 +10,15 @@ setUp()
 
     cd "$SHUNIT_TMPDIR"
     git init -q
-    ln -s "$TESTHOME/../../hooks/commit-msg" .git/hooks/
+
+    cat > .git/hooks/commit-msg << EOF
+#!/bin/sh
+# Require a ticket number
+
+# call commit-msg-require-ticket-number client hook directly (see NRTECH-1821)
+${TESTHOME}/../../hooks/commit-msg-require-ticket-number \$@
+EOF
+    chmod +x .git/hooks/commit-msg
 }
 
 testJiraTicket()

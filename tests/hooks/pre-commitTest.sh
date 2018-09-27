@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 dir="`dirname "$0"`"
 TESTHOME="`readlink -f "$dir"`"
 
@@ -10,7 +10,15 @@ setUp()
 
     cd "$SHUNIT_TMPDIR"
     git init -q
-    ln -s "$TESTHOME/../../hooks/pre-commit" .git/hooks/
+
+    cat > .git/hooks/pre-commit << EOF
+#!/bin/sh
+# Require a ticket number
+
+# call pre-commit-check-coding-style client hook directly (see NRTECH-1821)
+${TESTHOME}/../../hooks/pre-commit-check-coding-style \$@
+EOF
+    chmod +x .git/hooks/pre-commit
 }
 
 testFirstCommitClean()
