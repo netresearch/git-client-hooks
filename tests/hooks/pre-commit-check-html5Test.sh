@@ -7,46 +7,40 @@ setUp()
     cd "$TESTHOME"
 }
 
-testHtmlPartialError()
+testHtmlOk()
 {
-    ../../hooks/pre-commit-check-html5 ../files/html-partial-error.htm
+    ../../hooks/pre-commit-check-html5 ../files/ok1.html
+    assertTrue "$?"
+}
+
+testHtmlOk()
+{
+    ../../hooks/pre-commit-check-html5 ../files/ok2.html
+    assertTrue "$?"
+}
+
+testHtmlOk()
+{
+    ../../hooks/pre-commit-check-html5 ../files/ok3.html
+    assertTrue "$?"
+}
+
+testHtmlOk()
+{
+    ../../hooks/pre-commit-check-html5 ../files/not-ok1.html
     assertFalse "$?"
 }
 
-testHtmlPartialOk()
+testHtmlOk()
 {
-    ../../hooks/pre-commit-check-html5 ../files/html-partial-ok.htm
-    assertTrue $?
+    ../../hooks/pre-commit-check-html5 ../files/not-ok2.html
+    assertFalse "$?"
 }
 
-testHtmlEntity()
+testHtmlOk()
 {
-    ../../hooks/pre-commit-check-html5 ../files/html-entity.htm
-    assertTrue $?
-}
-
-testHtmlUnclosedP()
-{
-    ../../hooks/pre-commit-check-html5 ../files/html-unclosed-p.htm
-    assertFalse $?
-}
-
-testHtmlFluidCdataOk()
-{
-    ../../hooks/pre-commit-check-html5 ../files/html-fluid-cdata.htm
-    assertTrue $?
-}
-
-testHtmlFluidDebug()
-{
-    ../../hooks/pre-commit-check-html5 ../files/html-fluid-debug.htm
-    assertFalse $?
-}
-
-testHtmlFluidDebugInline()
-{
-    ../../hooks/pre-commit-check-html5 ../files/html-fluid-debug-inline.htm
-    assertFalse $?
+    ../../hooks/pre-commit-check-html5 ../files/not-ok3.html
+    assertFalse "$?"
 }
 
 . shunit2
