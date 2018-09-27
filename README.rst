@@ -39,8 +39,8 @@ Dependencies
 * ``json_pp`` for JSON syntax checks (in the Debian ``perl`` package)
 * ``php`` for PHP syntax checks
 * ``pcregrep`` for PHP whitespace check
-* ``html-validator`` for HTML5 check (``npm -g install {vnu-jar, html-validator-cli}``, )
-* ``xmllint`` for XML syntax checks
+* ``html-validator`` for HTML5 check (``npm -g install {vnu-jar,html-validator-cli}``)
+* ``xmllint`` for XML syntax checks (in the Debian ``libxml2-utils`` package)
 
 
 Global installation
@@ -85,3 +85,23 @@ Set the phpcs file encoding::
 Disable ``jshint`` checking::
 
     $ git config pre-commit.jshint 0
+
+
+Contributing
+============
+
+Testing
+-------
+
+Make sure, you have got ``shunit2``. E.g.
+
+    $ URL=https://raw.githubusercontent.com/kward/shunit2/master/shunit2
+    $ sudo curl "${URL}" -o /usr/local/bin/shunit2
+    $ sudo chmod +x /usr/local/bin/shunit2
+
+Also, make sure that all above mentioned dependencies are installed as well.
+
+Run the test via
+
+    $ tests/allTests.sh
+
