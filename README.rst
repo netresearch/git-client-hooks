@@ -93,7 +93,7 @@ Contributing
 Testing
 -------
 
-Make sure, you have got ``shunit2``. E.g.
+Make sure, you have got ``shunit2``. E.g.::
 
     $ URL=https://raw.githubusercontent.com/kward/shunit2/master/shunit2
     $ sudo curl "${URL}" -o /usr/local/bin/shunit2
@@ -101,7 +101,7 @@ Make sure, you have got ``shunit2``. E.g.
 
 Also, make sure that all above mentioned dependencies are installed as well.
 
-Run the test via
+Run the test via::
 
     $ tests/allTests.sh
 
