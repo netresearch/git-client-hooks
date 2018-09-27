@@ -9,7 +9,7 @@
 #       * vnu-jar
 #       * html-validator-cli
 
-if ! ( html-validator "$1" --quiet )
+if ! ( html-validator "--file=$1" --quiet )
   then
     >&2 echo "Invalid HTML in $1"
     exit 1
