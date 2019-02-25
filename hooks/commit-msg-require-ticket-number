@@ -1,7 +1,7 @@
 #!/bin/sh
 # Require a ticket number
 
-grep -EHnq "[A-Z]+-[0-9]+" "$1"; RET=$?
+grep -EHnq "[A-Z]+[A-Z0-9]+-[0-9]+" "$1"; RET=$?
 if [ $RET -eq 0 ]; then
     exit 0
 fi
