@@ -11,5 +11,10 @@ if [ $RET -eq 0 ]; then
     exit 0
 fi
 
+grep -EHnq "^\[RELEASE\] (v)?[0-9\.]+$" "$1"; RET=$?
+if [ $RET -eq 0 ]; then
+    exit 0
+fi
+
 echo "ERROR: Ticket number missing in commit message" 1>&2
 exit 1
